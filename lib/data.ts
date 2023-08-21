@@ -1,16 +1,16 @@
-type Post = {
-	id: string
-	title: string
-	desc: string
-	date: Date
-}
+// type Post = {
+// 	id: string
+// 	title: string
+// 	desc: string
+// 	date: Date
+// }
 
-let posts: Post[] = []
+let posts: IBlog[] = []
 
 // handlers
 export const getPosts = () => posts
 
-export const addPosts = (post: Post) => {
+export const addPosts = (post: IBlog) => {
 	posts.push(post)
 }
 

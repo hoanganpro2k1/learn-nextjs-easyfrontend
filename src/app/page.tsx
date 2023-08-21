@@ -1,6 +1,5 @@
 'use client'
 
-import Admin from '@/components/admin/page'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 
@@ -14,7 +13,6 @@ const Home: React.FC = () => {
     <div>
       <div>Hello</div>
       <Link href="/about">About page</Link>
-      <Admin />
     </div>
   )
 }
