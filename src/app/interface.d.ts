@@ -4,3 +4,8 @@ interface IBlog {
 	desc: string
 	date: Date
 }
+
+interface ILoginPayload {
+	username: string
+	password: string
+}
