@@ -8,14 +8,15 @@ const nextConfig = {
     },
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'source.unsplash.com',
-        port: '',
-        pathname: '/random',
-      },
-    ],
+    // remotePatterns: [
+    //   {
+    //     protocol: 'https',
+    //     hostname: 'res.cloudinary.com',
+    //     port: '',
+    //     pathname: '/random',
+    //   },
+    // ],
+    domains: ['res.cloudinary.com'],
   },
 }
 
