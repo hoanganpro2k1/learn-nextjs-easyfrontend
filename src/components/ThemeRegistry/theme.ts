@@ -21,13 +21,41 @@ const theme = createTheme({
 		fontFamily: roboto.style.fontFamily,
 	},
 	components: {
-		MuiAlert: {
+		MuiContainer: {
+			// Xet default cho cac thuoc tinh
+			defaultProps: {
+				maxWidth: 'md',
+			},
+			// Customer ghi de style cho cac thuoc tinh
 			styleOverrides: {
-				root: ({ ownerState }) => ({
-					...(ownerState.severity === 'info' && {
-						backgroundColor: '#60a5fa',
-					}),
-				}),
+				maxWidthSm: {
+					maxWidth: '680px',
+
+					'@media(min-width: 600px)': {
+						maxWidth: '680px',
+					},
+				},
+				maxWidthMd: {
+					maxWidth: '860px',
+
+					'@media(min-width: 900px)': {
+						maxWidth: '860px',
+					},
+				},
+			},
+			variants: [],
+		},
+		MuiLink: {
+			defaultProps: {
+				underline: 'hover',
+			},
+			styleOverrides: {
+				root: {
+					color: 'black',
+					'&:hover': {
+						color: '#FF6464',
+					},
+				},
 			},
 		},
 	},
