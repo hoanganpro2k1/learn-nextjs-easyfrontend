@@ -1,11 +1,13 @@
 import React from 'react';
-import { Box } from '@mui/system';
-import Link from 'next/link';
+import { Box, Container } from '@mui/system';
+import HeroSection from '@/components/home/hero';
+import RecentPosts from '@/components/home/recent-posts';
 
 export default function HomePage () {
   return (
-    <Box sx={{ display: 'flex' }}>
-      Home pages
+    <Box>
+      <HeroSection />
+      <RecentPosts />
     </Box>
   );
 }

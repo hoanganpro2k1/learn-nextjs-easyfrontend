@@ -1,13 +1,14 @@
-import { Roboto } from 'next/font/google'
-import { createTheme } from '@mui/material/styles'
+import { Heebo } from 'next/font/google'
+import { createTheme, responsiveFontSizes } from '@mui/material/styles'
+import { red } from '@mui/material/colors'
 
-const roboto = Roboto({
-	weight: ['300', '400', '500', '700'],
+const heebo = Heebo({
+	weight: ['400', '500', '700'],
 	subsets: ['latin'],
 	display: 'swap',
 })
 
-const theme = createTheme({
+let theme = createTheme({
 	palette: {
 		mode: 'light',
 		primary: {
@@ -15,10 +16,17 @@ const theme = createTheme({
 		},
 		secondary: {
 			main: '#00A8CC',
+			light: '#EDF7FA',
+		},
+		error: {
+			main: red.A400,
+		},
+		text: {
+			primary: '#21243D',
 		},
 	},
 	typography: {
-		fontFamily: roboto.style.fontFamily,
+		fontFamily: heebo.style.fontFamily,
 	},
 	components: {
 		MuiContainer: {
@@ -52,13 +60,44 @@ const theme = createTheme({
 			styleOverrides: {
 				root: {
 					color: 'black',
-					'&:hover': {
+					'&:hover, &.active': {
 						color: '#FF6464',
 					},
 				},
 			},
 		},
+		MuiTypography: {
+			defaultProps: {},
+			styleOverrides: {
+				root: {
+					color: 'black',
+					'&.active': {
+						color: '#FF6464',
+					},
+				},
+			},
+		},
+		MuiButton: {
+			variants: [
+				{
+					props: { variant: 'contained', color: 'primary' },
+					style: {
+						color: 'white',
+					},
+				},
+			],
+		},
 	},
 })
+
+theme = responsiveFontSizes(theme)
+
+// theme.typography.h3 = {
+// 	fontSize: '2rem',
+
+// 	[theme.breakpoints.up('md')]: {
+// 		fontSize: '3rem',
+// 	},
+// }
 
 export default theme

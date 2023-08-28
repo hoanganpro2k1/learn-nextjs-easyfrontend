@@ -19,10 +19,6 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
         <ThemeRegistry>
           <Stack minHeight={'100vh'}>
             <Header />
-
-            <Container maxWidth={'sm'} sx={{ bgcolor: 'primary.main' }}>SM container</Container>
-            <Container sx={{ bgcolor: 'primary.main' }}>MD container</Container>
-
             <Box component={'main'} flexGrow={1}>
               {children}
             </Box>
