@@ -4,18 +4,18 @@ import { Box } from '@mui/system';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import InputField from '../form/input-field';
-import { Button, IconButton, InputAdornment } from '@mui/material';
+import { Button, CircularProgress, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useRouter } from 'next/navigation';
 
 interface LoginFormProps {
   onSubmit?: (payload: LoginPayload) => void
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
-  const router = useRouter();
+  // Nếu form có nhiều trường thì tạo file riêng
+  // const schema = useLoginFormSchema();
   const schema = yup.object().shape({
     username: yup
       .string()
@@ -29,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   })
 
   const [showPassword, setShowPassword] = useState(false);
-  const { control, handleSubmit } = useForm<LoginPayload>({
+  const { control, handleSubmit, formState: { isSubmitting } } = useForm<LoginPayload>({
     defaultValues: {
       username: '',
       password: '',
@@ -37,9 +37,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     resolver: yupResolver(schema)
   })
 
-  const handleLoginSubmit = (payload: LoginPayload) => {
-    onSubmit?.(payload);
-    router.push('/')
+  const handleLoginSubmit = async (payload: LoginPayload) => {
+    await onSubmit?.(payload);
   }
 
   return (
@@ -65,7 +64,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         }}
       />
 
-      <Button type='submit' variant='contained' fullWidth sx={{ mt: 3 }}>Login</Button>
+      <Button
+        disabled={isSubmitting}
+        startIcon={isSubmitting ? <CircularProgress color='inherit' size={'1em'} /> : null}
+        type='submit'
+        variant='contained'
+        fullWidth
+        sx={{ mt: 3 }}
+      >
+        Login
+      </Button>
     </Box>
   );
 };
