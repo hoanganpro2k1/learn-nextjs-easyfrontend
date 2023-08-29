@@ -1,5 +1,7 @@
 import useSWR from 'swr'
 import { PublicConfiguration } from 'swr/_internal'
+import { authApi } from '../../api-client/auth-api'
+import { setCookie } from 'cookies-next'
 
 export const useAuth = (option?: Partial<PublicConfiguration>) => {
 	const {
@@ -12,8 +14,24 @@ export const useAuth = (option?: Partial<PublicConfiguration>) => {
 		...option,
 	})
 
+	const firstLoading = profile === undefined && error === undefined
+
+	const login = async (payload: LoginPayload) => {
+		const res = await authApi.login(payload)
+		setCookie('access_token', res.data.accessToken)
+		await mutate()
+	}
+
+	const logout = async () => {
+		await authApi.logout()
+		mutate(null, false)
+	}
+
 	return {
 		profile,
 		error,
+		login,
+		logout,
+		firstLoading,
 	}
 }

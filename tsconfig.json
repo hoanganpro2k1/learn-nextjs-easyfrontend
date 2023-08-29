@@ -25,6 +25,7 @@
       "@/styles/*": ["./styles/*"],
       "@/hooks/*": ["./hooks/*"],
       "@/common/*": ["./common/*"],
+      "@/api/*": ["./api-client/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -23,6 +23,7 @@ const InputField: React.FC<InputFieldProps> = ({
     name,
     control
   });
+
   return (
     <TextField
       name={name}
@@ -34,6 +35,8 @@ const InputField: React.FC<InputFieldProps> = ({
       fullWidth
       margin='normal'
       size='small'
+      error={!!error}
+      helperText={error?.message}
       {...rest}
     />
   );

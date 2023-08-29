@@ -6,26 +6,49 @@ import { useForm } from 'react-hook-form'
 import InputField from '../form/input-field';
 import { Button, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/navigation';
 
-const LoginForm: React.FC = () => {
+interface LoginFormProps {
+  onSubmit?: (payload: LoginPayload) => void
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+  const router = useRouter();
+  const schema = yup.object().shape({
+    username: yup
+      .string()
+      .required('Please enter a username')
+      .min(4, 'Username is required to have at least 4 character'),
+
+    password: yup
+      .string()
+      .required('Please enter a password')
+      .min(6, 'Password is required to have at least 6 character')
+  })
+
   const [showPassword, setShowPassword] = useState(false);
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<LoginPayload>({
     defaultValues: {
       username: '',
       password: '',
-    }
+    },
+    resolver: yupResolver(schema)
   })
 
-  const handleLoginSubmit = (values: any) => {
-    console.log('values:', values)
+  const handleLoginSubmit = (payload: LoginPayload) => {
+    onSubmit?.(payload);
+    router.push('/')
   }
 
   return (
     <Box component={'form'} onSubmit={handleSubmit(handleLoginSubmit)}>
-      <InputField name='username' control={control} />
+      <InputField name='username' label='Username' control={control} />
       <InputField
         type={showPassword ? 'text' : 'password'}
         name='password'
+        label='Password'
         control={control}
         InputProps={{
           endAdornment: (
@@ -42,7 +65,7 @@ const LoginForm: React.FC = () => {
         }}
       />
 
-      <Button type='submit' variant='contained'>Login</Button>
+      <Button type='submit' variant='contained' fullWidth sx={{ mt: 3 }}>Login</Button>
     </Box>
   );
 };
