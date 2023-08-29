@@ -9,9 +9,9 @@ export default function HomePage () {
   return (
     <Box>
       <Seo data={{
-        title: '',
-        description: '',
-        url: '',
+        title: 'NextJS Tutorials | Easy Frontend',
+        description: 'Step by step tutorials to build a full CRUD website using NextJS for beginners',
+        url: 'https://learn-nextjs-easyfrontend.vercel.app/',
         thumbnailUrl: ''
       }} />
       <HeroSection />
