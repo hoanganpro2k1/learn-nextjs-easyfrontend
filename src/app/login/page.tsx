@@ -2,9 +2,8 @@
 
 import LoginForm from '@/components/auth/login-form';
 import { useAuth } from '@/hooks/use-auth';
-import { Button, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import React from 'react'
-import { authApi } from '../../../api-client/auth-api';
 import { Box } from '@mui/system';
 import { useRouter } from 'next/navigation';
 
